@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0710;
+  --color-surface: #160c24;
+  --color-surface-2: #1e1230;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-violet-700: #5b21b6;
+  --color-pop: #e4319a;
+  --color-paper: #f5f1fa;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+}
+
+/* Respect reduced-motion preferences across custom animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes draw-hand {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-hand-path {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw-hand 2.2s ease-out forwards;
+}
+
+@keyframes word-flip-in {
+  0% {
+    transform: translateY(0.6em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes word-flip-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-0.6em);
+    opacity: 0;
+  }
+}
+
+.word-enter {
+  animation: word-flip-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.word-exit {
+  animation: word-flip-out 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes caret-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.typewriter-caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
