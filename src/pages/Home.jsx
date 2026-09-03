@@ -10,7 +10,7 @@ export default function Home() {
 
       {/* Ambient glow — the one place the accent color is allowed to bloom */}
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-violet-600/25 blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-130 w-130 -translate-x-1/2 rounded-full bg-violet-600/25 blur-[120px]"
         aria-hidden="true"
       />
 
@@ -28,7 +28,7 @@ export default function Home() {
         </p>
 
         <Link
-          to="/soon/lets-go"
+          to="/tier1"
           className="mt-9 rounded-full bg-violet-600 px-8 py-4 font-display text-base font-semibold text-paper shadow-lg shadow-violet-600/30 transition hover:-translate-y-0.5 hover:bg-violet-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           Let's go!
