@@ -1,34 +1,39 @@
-import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import Header from '../components/Header'
-import PracticeModal from '../components/PracticeModal'
-import LevelCard from '../components/LevelCard'
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Header from "../components/Header";
+import PracticeModal from "../components/PracticeModal";
+import LevelCard from "../components/LevelCard";
 
-const LEVELS = [1, 2, 3, 4]
-const PROGRESS_KEY = 'sq_tier1_progress'
+const LEVELS = [1, 2, 3, 4];
+const PROGRESS_KEY = "sq_tier1_progress";
 
 export default function Tier1() {
-  const location = useLocation()
+  const location = useLocation();
   // Level.jsx passes { skipPractice: true } via navigate() state when
   // returning here from "← Menu" or "Continue" — in that case the modal
   // shouldn't auto-open. Any other way of landing on /tier1 (e.g. the
   // "Let's go!" button on Home) shows it as normal.
-  const [showModal, setShowModal] = useState(() => !location.state?.skipPractice)
-  const [progress, setProgress] = useState(() => Number(localStorage.getItem(PROGRESS_KEY) || 0))
+  const [showModal, setShowModal] = useState(
+    () => !location.state?.skipPractice,
+  );
+  const [progress, setProgress] = useState(() =>
+    Number(localStorage.getItem(PROGRESS_KEY) || 0),
+  );
 
   useEffect(() => {
-    localStorage.setItem(PROGRESS_KEY, String(progress))
-  }, [progress])
+    localStorage.setItem(PROGRESS_KEY, String(progress));
+  }, [progress]);
 
   // Level pages write their own completion back via localStorage; re-sync
   // when returning to this page (e.g. after completing a level).
   useEffect(() => {
-    const onFocus = () => setProgress(Number(localStorage.getItem(PROGRESS_KEY) || 0))
-    window.addEventListener('focus', onFocus)
-    return () => window.removeEventListener('focus', onFocus)
-  }, [])
+    const onFocus = () =>
+      setProgress(Number(localStorage.getItem(PROGRESS_KEY) || 0));
+    window.addEventListener("focus", onFocus);
+    return () => window.removeEventListener("focus", onFocus);
+  }, []);
 
-  const tier2Unlocked = progress >= LEVELS.length
+  const tier2Unlocked = progress >= LEVELS.length;
 
   return (
     <main className="relative min-h-screen bg-ink">
@@ -42,9 +47,12 @@ export default function Tier1() {
             <span className="font-display text-sm uppercase tracking-[0.2em] text-violet-400">
               Tier 1
             </span>
-            <h1 className="mt-1 font-display text-3xl font-semibold text-paper sm:text-4xl">Alpha</h1>
+            <h1 className="mt-1 font-display text-3xl font-semibold text-paper sm:text-4xl">
+              Alpha
+            </h1>
             <p className="mt-3 max-w-md font-body text-paper/70">
-              Clear each level to unlock the next. Finish all four to move on to Tier 2.
+              Clear each level to unlock the next. Finish all four to move on to
+              Tier 2.
             </p>
           </div>
 
@@ -71,7 +79,7 @@ export default function Tier1() {
         <div className="mt-10">
           {tier2Unlocked ? (
             <Link
-              to="/soon/tier-2"
+              to="/next-steps"
               className="inline-block rounded-full bg-violet-600 px-6 py-3 font-display text-sm font-semibold text-paper transition hover:bg-violet-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
             >
               Move to Tier 2
@@ -88,5 +96,5 @@ export default function Tier1() {
         </div>
       </div>
     </main>
-  )
+  );
 }
